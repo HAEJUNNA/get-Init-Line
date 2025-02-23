@@ -1,12 +1,14 @@
 package com.application.getinitline.controller.api;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.function.RequestPredicates;
 import org.springframework.web.servlet.function.RouterFunction;
 import org.springframework.web.servlet.function.RouterFunctions;
 import org.springframework.web.servlet.function.ServerResponse;
 
 import java.util.List;
 
+import static org.springframework.web.servlet.function.RequestPredicates.*;
 import static org.springframework.web.servlet.function.RouterFunctions.*;
 
 /**
@@ -66,12 +68,13 @@ public class APIPlaceRouter {
         *  @GetMapping("/places")
         *  public List<String> getplaces() {return List.of("placel","place2");}
         * */
-        return route()
-                .GET("/api/places",req -> ServerResponse.ok().body(List.of("placel","place2")))
-                .POST("/api/places",req -> ServerResponse.ok().body(true))
-                .GET("/api/places/{placesId}",req -> ServerResponse.ok().body("places " + req.pathVariable("placesId")))
-                .PUT("/api/places/{placesId}",req -> ServerResponse.ok().body(true))
-                .DELETE("/api/places/{placesId}",req -> ServerResponse.ok().body(true))
+        return route().nest(path("/api/places") , builder -> builder
+                        .GET("",req -> ServerResponse.ok().body(List.of("placel","place2")))
+                .POST("",req -> ServerResponse.ok().body(true))
+                .GET("/{placesId}",req -> ServerResponse.ok().body("places " + req.pathVariable("placesId")))
+                .PUT("/{placesId}",req -> ServerResponse.ok().body(true))
+                .DELETE("/{placesId}",req -> ServerResponse.ok().body(true)))
                 .build();
+
     }
 }
