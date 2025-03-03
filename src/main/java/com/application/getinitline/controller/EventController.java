@@ -26,4 +26,6 @@ public class EventController {
 
     @GetMapping(value = "{eventId}")
     public String eventDetail(@PathVariable Integer id) {return "event/detail";}
+
+
 }

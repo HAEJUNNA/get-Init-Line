@@ -22,19 +22,19 @@ public class APIPlaceController {
 
     //헨들러 메소드.... - SpringWeb에서 사용자의 요청을 받아 응답을 리턴하는 메소드
     // @RequestMapping 필터의 역할을 한다.
-    @RequestMapping(
-            name = "IamNma", // 뷰템플릿에서 해당 메서드를 부를수 있는 이름
-            //name ="" 을 빈값으로 두면 getplaces() 메소드 기준 "AC#getplaces" 가 자동으로 기본이름이된다.
-            value = "/uriPATH", // 내 URI , ENDPOINT 경로
-            path = "/places", // value와 동일
-            method = RequestMethod.GET, // Http method 어떤방식으로할지
-            params = "test=true", // GET방식으로 요청올때, query-Param에서 test=true 파라미터가 있는 요청만 받겟다. (파라미터 검사)
-            headers = "header-auth=stupidPassword", // header-auth 헤더값 있는 요청만.(헤더 검사)
-            consumes = MediaType.APPLICATION_JSON_VALUE, // json으로 데이터 주는 요청만 (헤더의 Content-Type 검사)
-            // json으로 데이터 받을수있니? (헤더의 Accept 검사), 서버가 클라이언트에게 묻는거다.
-            // 받을수 있다고 , 받겠다고 해당 값을 헤더에 담아 넘기면 서버는 그 형태로 리턴값을 던져주는거다.
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
+//    @RequestMapping(
+//            name = "IamNma", // 뷰템플릿에서 해당 메서드를 부를수 있는 이름
+//            //name ="" 을 빈값으로 두면 getplaces() 메소드 기준 "AC#getplaces" 가 자동으로 기본이름이된다.
+//            value = "/uriPATH", // 내 URI , ENDPOINT 경로
+//            path = "/places", // value와 동일
+//            method = RequestMethod.GET, // Http method 어떤방식으로할지
+//            params = "test=true", // GET방식으로 요청올때, query-Param에서 test=true 파라미터가 있는 요청만 받겟다. (파라미터 검사)
+//            headers = "header-auth=stupidPassword", // header-auth 헤더값 있는 요청만.(헤더 검사)
+//            consumes = MediaType.APPLICATION_JSON_VALUE, // json으로 데이터 주는 요청만 (헤더의 Content-Type 검사)
+//            // json으로 데이터 받을수있니? (헤더의 Accept 검사), 서버가 클라이언트에게 묻는거다.
+//            // 받을수 있다고 , 받겠다고 해당 값을 헤더에 담아 넘기면 서버는 그 형태로 리턴값을 던져주는거다.
+//            produces = MediaType.APPLICATION_JSON_VALUE
+//    )
     @GetMapping("/places") //맵핑정보
     public List<String> getplaces() { // 요청
         /*
