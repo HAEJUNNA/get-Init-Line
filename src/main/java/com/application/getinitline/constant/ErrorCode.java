@@ -55,7 +55,7 @@ public enum ErrorCode {
     public String getMessage(String msg) {
         return Optional.ofNullable(msg)
                 .filter(Predicate.not(String::isBlank))
-                .orElse(getMessage()); // 기본메세지 @Getter 를 통해 만들어진 getMessage() 출력
+                .orElse(getMessage()); // msg 가 없으면, 기본메세지 @Getter 를 통해 만들어진 getMessage() 출력
     }
 
     public boolean isClientSideError(){return this.getErrorCategory() == ErrorCategory.CLIENT_SIDE;}

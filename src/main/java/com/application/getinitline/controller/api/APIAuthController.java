@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * -----------------------------------------------------------
  * 2025-02-22        NAHAEJUN              최초생성
  */
-@RequestMapping(value = "")
+@RequestMapping(value = "/api")
 @RestController
 public class APIAuthController {
     
