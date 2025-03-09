@@ -54,7 +54,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
                 , status
                 , req);
     }
-    
+
     // 우리가 알지못하는 에러들을 다루기 위한 메서드
     // RestController 한정
     // Exception 터졌을경우 이곳으로 오게된다.

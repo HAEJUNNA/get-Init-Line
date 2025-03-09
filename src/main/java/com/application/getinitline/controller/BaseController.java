@@ -30,8 +30,7 @@ public class BaseController {
     * */
     @GetMapping(value = "/")
     public String root() throws Exception{
-        throw new Exception("에러");
-//        return "index";
+        return "index";
     }
 
 }
