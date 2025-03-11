@@ -34,13 +34,12 @@ class BaseErrorControllerTest {
         this.mockMvc = mockMvc;
     }
 
-    @DisplayName("[view][GET] 기본 페이지 요청")
+    @DisplayName("[view][GET] 기본 에러 페이지 - 페이지 없음")
     @Test
-    void testRoot() throws Exception {
-
+    void givenWrongURI_whenRequestingPage_thenReturns404ErrorPage() throws Exception {
 
         mockMvc.perform(get("/asdasd")) // 일부러 에러 발생, 그렇기때문에 하위 테스트는 굳이 필요 x
-                .andExpect(status().isNotFound()) //httpStatus검사를 해준다
-                .andDo(print()); // 잃반적으로 에러발생해야지만 출력
+                .andExpect(status().isNotFound())
+                .andDo(print()); //
     }
 }
