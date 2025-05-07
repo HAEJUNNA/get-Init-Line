@@ -29,7 +29,7 @@ class APIPlaceControllerTest {
 
     public APIPlaceControllerTest(@Autowired MockMvc mvc){this.mockMvc = mvc;}
 
-    @DisplayName("[API] [GET] 장소 리스트 조회")
+    @DisplayName("[API] [GET] 장소 리스트 조회[정상 작동 케이스]")
     @Test
     void givenNothing_whenRequestingPlaces_thenReturnsListOfPlacesInStandardResponse() throws Exception {
         // Given
@@ -38,9 +38,9 @@ class APIPlaceControllerTest {
         //장소를 요청하면 장소에 리스트를 전달한다.
         mockMvc.perform(get("/api/placesTest"))
                 .andExpect(status().isOk())
-                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.data").isArray()) // jsonPath 는 json을 검사해준다.
-                .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))//순서대로 데이터 잘넘어왔는지 체크
+                .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))// 반환타입이 json인지
+                .andExpect(jsonPath("$.data").isArray()) // jsonPath로 데이터가 Array형태로 되어있는가.
+                .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))//첫번째 원소가 필요한 필드들을 다 충족시키고 있는지
                 .andExpect(jsonPath("$.data[0].placeName").value("랄라배드민턴장"))
                 .andExpect(jsonPath("$.data[0].address").value("서울시 강남구 강남대로"))
                 .andExpect(jsonPath("$.data[0].phoneNumber").value("010-1234-5678"))
@@ -53,11 +53,11 @@ class APIPlaceControllerTest {
 
     }
 
-    @DisplayName("[API] [GET] 단일 장소 조회 있는곳 [오류 검증]")
+    @DisplayName("[API] [GET] 단일 장소 조회 있는곳 [비정상 작동 검증]")
     @Test
     void givenPlaceAndItsId_whenRequestingPlaces_thenReturnsPlaceInStandardResponse() throws Exception {
         // Given - 데이터가 있는경우
-
+        // 테스트 데이터
         int placeId = 1;
 
         // When & Then

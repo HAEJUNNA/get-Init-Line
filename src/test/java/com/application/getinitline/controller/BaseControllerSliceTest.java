@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * -----------------------------------------------------------
  * 2025-03-09        NAHAEJUN              최초생성
  */
-//@WebMvcTest //WebMvcTest 가 모든 컨트롤러를 다읽는다.
+//@WebMvcTest //WebMvcTest만 선언하면 ,모든 컨트롤러를 다읽는다.
 @WebMvcTest(BaseControllerSliceTest.class) //단, 클래스만 지정해서도 가능, 이렇게 되면 로딩시 지정한 컨트롤러만 테스트 가능
 class BaseControllerSliceTest {
 

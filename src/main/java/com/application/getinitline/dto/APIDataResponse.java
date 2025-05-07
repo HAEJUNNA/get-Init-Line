@@ -47,7 +47,7 @@ import lombok.ToString;
 // 이건 즉, 추이성을 지키기 위한 옵션이라고 생각하면된다.
 @EqualsAndHashCode(callSuper=false)
 public class APIDataResponse<T> extends APIErrorResponse{
-    // 타입 세이프티를 적절히 활용하지 못해 제네릭으로 교체
+    // 타입 세이프티를 적절히 활용하지 못해, 제네릭으로 교체
     private final T data;
 
     private APIDataResponse(T data) {

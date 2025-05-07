@@ -31,7 +31,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @AutoConfigureMockMvc// 설정시 MockMvc를 AutoWired로 바로 주입 받을수있다.
 // WebEnvironment.NONE (서버 필요x) , WebEnvironment.MOCK(서버필요) , 진짜환경 WebEnvironment.DFINED_PORT,RANDOM_PORT
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE) // @ExtendWith 이 추가되어 실제로 생성자 주입이 가능해짐
+//@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE) // @ExtendWith 이 추가되어 실제로 생성자 주입이 가능해짐
+@SpringBootTest
 class BaseControllerTest {
 
 //    @Autowired
@@ -44,13 +45,14 @@ class BaseControllerTest {
     * 5부터는 ParameterResolver 틀 통해서 가능
     * @SpringBootTest -> @ExtendWith({SpringExtension.class}) 통해서 가능
     * */
-    
-    private final MockMvc mockMvc;
+    @Autowired
+    private MockMvc mockMvc;
 
     // 입력인자, 즉 주입받고자 하는 매개변수에 @Autowired를 꼭 붙여야 한다.
-    public BaseControllerTest(@Autowired MockMvc mockMvc) {
-        this.mockMvc = mockMvc;
-    }
+//    @Autowired
+//    public BaseControllerTest(MockMvc mockMvc) {
+//        this.mockMvc = mockMvc;
+//    }
 
     /**
      * packageName    : com.application.getinitline.controller
@@ -71,14 +73,16 @@ class BaseControllerTest {
     void testRoot() throws Exception {
         // Given
 
-        // When
+        // When - GET매핑이라 get() 사용 , mock을 이용해 가짜 인스턴스 생성
         ResultActions resultActions = mockMvc.perform(get("/"));
 
         // Then
         resultActions.andExpect(status().isOk()) //httpStatus검사를 해준다
 //                .andExpect(content().contentType(MediaType.TEXT_HTML)) //contentType검사
-                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) // contentTypeCompatibleWith 은 해당 타입 하나라도 속하면
-                .andExpect(content().string(containsString("this page!"))) //내용 body를 검사한다. string()을 쓸경우 완벽히 일치해야한다
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML)) 
+                //contentTypeCompatibleWith 은 해당 타입 하나라도 속하면 테스트 통과
+                // 반환 타입이 view이면 TEXT_HTML으로 검사
+                .andExpect(content().string(containsString("this page!"))) //내용 body를 검사한다. string()을 쓸경우 완벽히 일치하는 내용이 있어야한다.
                 .andExpect(view().name("index")) // 맵핑 테스트, 즉 view 네임
                 .andDo(print()); // 잃반적으로 에러발생해야지만 출력하는데 , andDo쓸경우 에러, 성공 상관없이 출력
         // When &Then
@@ -89,5 +93,35 @@ class BaseControllerTest {
 //                        "루트페이지로 인식!!!"))) //내용 body를 검사한다. string()을 쓸경우 완벽히 일치해야한다
 //                .andExpect(view().name("index")) // 맵핑 테스트, 즉 view 네임
 //                .andDo(print()); // 잃반적으로 에러발생해야지만 출력하는데 , andDo쓸경우 에러, 성공 상관없이 출력
+    }
+
+    /**
+     * packageName    : com.application.getinitline.controller
+     * fileName       : BaseControllerTest
+     * author         : NAHAEJUN
+     * date           : 2025-03-09
+     * description    :
+     * Junit5 생성자 주입 방식
+     * ===========================================================
+     * DATE              AUTHOR             NOTE
+     * -----------------------------------------------------------
+     * 2025-03-09        NAHAEJUN              최초생성
+     */
+    @DisplayName("[view][GET] 기본 페이지 요청")
+    @Test
+    // 필드주입 받을때 입력인자, 즉 주입받고자 하는 매개변수에 @Autowired를 꼭 붙여야 한다
+//    void testRoot(@Autowired MockMvc mvc) throws Exception { // @Autowired 꼭 붙여야함
+    void testRoot2(@Autowired MockMvc mockMvc2) throws Exception {
+        // Given
+
+        // When - GET매핑이라 get() 사용 , mock을 이용해 가짜 인스턴스 생성
+        ResultActions resultActions = mockMvc2.perform(get("/"));
+
+        // Then
+        resultActions.andExpect(status().isOk()) //httpStatus검사를 해준다
+                .andExpect(content().contentTypeCompatibleWith(MediaType.TEXT_HTML))
+                .andExpect(content().string(containsString("this page!"))) //내용 body를 검사한다. string()을 쓸경우 완벽히 일치하는 내용이 있어야한다.
+                .andExpect(view().name("index")) // 맵핑 테스트, 즉 view 네임
+                .andDo(print()); // 잃반적으로 에러발생해야지만 출력하는데 , andDo쓸경우 에러, 성공 상관없이 출력
     }
 }
