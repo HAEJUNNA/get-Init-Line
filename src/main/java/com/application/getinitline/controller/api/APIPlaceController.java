@@ -41,9 +41,9 @@ public class APIPlaceController {
     @GetMapping("/places") //맵핑정보
     public List<String> getplaces() { // 요청
         /*
-        * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
-        * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
-        * */
+         * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
+         * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
+         * */
         return List.of("placel","place2"); // 응답
     }
     // APIPlaceControllerTest 테스트용
