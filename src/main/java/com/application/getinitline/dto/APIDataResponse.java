@@ -1,8 +1,8 @@
 package com.application.getinitline.dto;
 
+import com.application.getinitline.constant.ErrorCode;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 
 /**
@@ -22,19 +22,24 @@ import lombok.ToString;
 // equals hex 코드도 불러서 사용할수 있게 끝 안에있는 필드들도 동일한지 검사하를 하기위함
 // 이건 즉, 추이성을 지키기 위한 옵션이라고 생각하면된다.
 @EqualsAndHashCode(callSuper=false)
-public class APIDataResponse extends APIErrorResponse{
+public class APIDataResponse<T> extends APIErrorResponse{
 
-    private final Object data;
+    private final T data;
 
-    private APIDataResponse(boolean success, Integer errorCode, String message, Object data) {
-        super(success, errorCode, message);
+    private APIDataResponse(T data) {
+        super(true
+                , ErrorCode.OK.getCode()
+                , ErrorCode.OK.getMessage() );
         this.data = data;
     }
     /*
     *  type safe feature를 충분히 쓸수가 없기 떄문에, 해당 dto를 사용
     * */
-    public static APIDataResponse of( boolean success, Integer errorCode, String message, Object data) {
-        return new APIDataResponse(success, errorCode, message, data);
+    public static <T> APIDataResponse<T> of(T data) {
+        return new APIDataResponse<>(data);
+    }
+    public static <T> APIDataResponse<T> empty() {
+        return new APIDataResponse<>(null);
     }
 }
 

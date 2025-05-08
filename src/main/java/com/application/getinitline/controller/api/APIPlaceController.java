@@ -1,5 +1,8 @@
 package com.application.getinitline.controller.api;
 
+import com.application.getinitline.constant.PlaceType;
+import com.application.getinitline.dto.APIDataResponse;
+import com.application.getinitline.dto.PlaceDto;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,10 +41,23 @@ public class APIPlaceController {
     @GetMapping("/places") //맵핑정보
     public List<String> getplaces() { // 요청
         /*
-        * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
-        * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
-        * */
+         * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
+         * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
+         * */
         return List.of("placel","place2"); // 응답
+    }
+    // APIPlaceControllerTest 테스트용
+    @GetMapping("/placesTest")
+    public APIDataResponse<List<PlaceDto>> getTestPlaces() {
+
+        return APIDataResponse.of(List.of(PlaceDto.of(
+                PlaceType.COMMON,
+                "랄라배드민턴장",
+                "서울시 강남구 강남대로",
+                "010-1234-5678",
+                30,
+                "신장 개업"
+        )));
     }
 
     @PostMapping("/places")
@@ -49,9 +65,26 @@ public class APIPlaceController {
         return true;
     }
 
-    @GetMapping("/palces/{placesId}")
+    @GetMapping("/places/{placesId}")
     public String getPlaces(@PathVariable String placesId){
         return "places " + placesId;
+    }
+    // 단일 , 주소 테스트
+    @GetMapping("/placeTest/{placesId}")
+    public APIDataResponse<PlaceDto> getTestPlace(@PathVariable String placesId){
+
+        if (placesId.equals(2)) {
+            return APIDataResponse.of(null);
+        }
+
+        return APIDataResponse.of( PlaceDto.of(
+                PlaceType.COMMON,
+                "랄라배드민턴장",
+                "서울시 강남구 강남대로",
+                "010-1234-5678",
+                30,
+                "신장 개업"
+        ));
     }
 
     @PutMapping("/places/{placeId}")
