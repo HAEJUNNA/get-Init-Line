@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-error페이지
+<p>
+    This is <span th:text="${statusCode} ?: _">???</span> error page.
+</p>
+<ul>
+    <li> error code : <span th:text="${errorCode} ?: _">?</span></li>
+    <li> error code : <span th:text="${message} ?: _">?</span></li>
+</ul>
 </body>
 </html>

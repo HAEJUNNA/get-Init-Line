@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- xmlns:th="http://www.thymeleaf.org" 덕분에 thymeleaf 템플릿으로 변환 가능 -->
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<p>
+    This is places page.
+</p>
+<ul>
+    <li>placeType: <span th:text="${placeType}"/> </li>
+    <li>placeName: <span th:text="${placeName}"/> </li>
+    <li>address: <span th:text="${address}"/> </li>
+</ul>
 </body>
 </html>
