@@ -57,6 +57,7 @@ class APIPlaceControllerTest {
         // When & Then
         mockMvc.perform(get("/api/places"))
                 .andExpect(status().isOk()) //200이 떨어져야함
+
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isArray()) // jsonPath 는 json을 검사해준다.
                 .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))//순서대로 데이터 잘넘어왔는지 체크
@@ -64,6 +65,7 @@ class APIPlaceControllerTest {
                 .andExpect(jsonPath("$.data[0].address").value("서울시 강남구 강남대로"))
                 .andExpect(jsonPath("$.data[0].phoneNumber").value("010-1234-5678"))
                 .andExpect(jsonPath("$.data[0].capacity").value(30))
+                .andExpect(jsonPath("$.data[0].memo").value("신장 개업"))
                 .andExpect(jsonPath("$.success").value(true))
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
