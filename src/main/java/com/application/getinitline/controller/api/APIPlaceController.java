@@ -3,6 +3,8 @@ package com.application.getinitline.controller.api;
 import com.application.getinitline.constant.PlaceType;
 import com.application.getinitline.dto.APIDataResponse;
 import com.application.getinitline.dto.PlaceDto;
+import com.application.getinitline.dto.PlaceResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,6 +48,22 @@ public class APIPlaceController {
 //         * */
 //        return List.of("placel","place2"); // 응답
 //    }
+
+    @GetMapping("/places")
+    public APIDataResponse<List<PlaceResponse>> getPlaces() {
+        return APIDataResponse.of(List.of(
+                PlaceResponse.of(
+                        PlaceType.COMMON,
+                        "랄라배드민턴장",
+                        "서울시 강남구 강남대로",
+                        "010-1234-5678",
+                        30,
+                        "신장 개업"
+                )
+        ));
+    }
+
+
 
     @PostMapping("/places")
     public Boolean createPlaces(){
