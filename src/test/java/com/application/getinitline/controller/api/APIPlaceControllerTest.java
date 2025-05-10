@@ -52,6 +52,8 @@ class APIPlaceControllerTest {
     void givenNothing_whenRequestingPlaces_thenReturnsPlaceInStandardResponse() throws Exception {
         // Given
 
+
+
         // When & Then
         mockMvc.perform(get("/api/places"))
                 .andExpect(status().isOk()) //200이 떨어져야함
