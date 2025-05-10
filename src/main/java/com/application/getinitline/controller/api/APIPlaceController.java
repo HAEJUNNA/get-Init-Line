@@ -38,27 +38,14 @@ public class APIPlaceController {
 //            // 받을수 있다고 , 받겠다고 해당 값을 헤더에 담아 넘기면 서버는 그 형태로 리턴값을 던져주는거다.
 //            produces = MediaType.APPLICATION_JSON_VALUE
 //    )
-    @GetMapping("/places") //맵핑정보
-    public List<String> getplaces() { // 요청
-        /*
-         * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
-         * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
-         * */
-        return List.of("placel","place2"); // 응답
-    }
-    // APIPlaceControllerTest 테스트용
-    @GetMapping("/placesTest")
-    public APIDataResponse<List<PlaceDto>> getTestPlaces() {
-
-        return APIDataResponse.of(List.of(PlaceDto.of(
-                PlaceType.COMMON,
-                "랄라배드민턴장",
-                "서울시 강남구 강남대로",
-                "010-1234-5678",
-                30,
-                "신장 개업"
-        )));
-    }
+//    @GetMapping("/places") //맵핑정보
+//    public List<String> getplaces() { // 요청
+//        /*
+//         * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
+//         * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
+//         * */
+//        return List.of("placel","place2"); // 응답
+//    }
 
     @PostMapping("/places")
     public Boolean createPlaces(){
