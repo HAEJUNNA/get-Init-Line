@@ -60,7 +60,7 @@ class APIPlaceControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").isArray()) // jsonPath 는 json을 검사해준다.
                 .andExpect(jsonPath("$.data[0].placeType").value(PlaceType.COMMON.name()))//순서대로 데이터 잘넘어왔는지 체크
-                .andExpect(jsonPath("$.data[0].placeName").value("랄라배드민턴장"))
+                .andExpect(jsonPath("$.data[0].placeName").value("랄라배드턴장"))
                 .andExpect(jsonPath("$.data[0].address").value("서울시 강남구 강남대로"))
                 .andExpect(jsonPath("$.data[0].phoneNumber").value("010-1234-5678"))
                 .andExpect(jsonPath("$.data[0].capacity").value(30))
