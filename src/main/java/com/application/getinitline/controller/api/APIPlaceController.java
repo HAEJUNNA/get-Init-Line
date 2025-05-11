@@ -3,6 +3,8 @@ package com.application.getinitline.controller.api;
 import com.application.getinitline.constant.PlaceType;
 import com.application.getinitline.dto.APIDataResponse;
 import com.application.getinitline.dto.PlaceDto;
+import com.application.getinitline.dto.PlaceResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,27 +40,30 @@ public class APIPlaceController {
 //            // 받을수 있다고 , 받겠다고 해당 값을 헤더에 담아 넘기면 서버는 그 형태로 리턴값을 던져주는거다.
 //            produces = MediaType.APPLICATION_JSON_VALUE
 //    )
-    @GetMapping("/places") //맵핑정보
-    public List<String> getplaces() { // 요청
-        /*
-         * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
-         * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
-         * */
-        return List.of("placel","place2"); // 응답
-    }
-    // APIPlaceControllerTest 테스트용
-    @GetMapping("/placesTest")
-    public APIDataResponse<List<PlaceDto>> getTestPlaces() {
+//    @GetMapping("/places") //맵핑정보
+//    public List<String> getplaces() { // 요청
+//        /*
+//         * 응답 요청으로 @ResponseBody , ResponseEntity는 정확히 동일한 동작을 한다.
+//         * ResponseEntity 를 return타입으로 정했을때는 responseBody를 명시하지 않아도 된다.
+//         * */
+//        return List.of("placel","place2"); // 응답
+//    }
 
-        return APIDataResponse.of(List.of(PlaceDto.of(
-                PlaceType.COMMON,
-                "랄라배드민턴장",
-                "서울시 강남구 강남대로",
-                "010-1234-5678",
-                30,
-                "신장 개업"
-        )));
+    @GetMapping("/places")
+    public APIDataResponse<List<PlaceResponse>> getPlaces() {
+        return APIDataResponse.of(List.of(
+                PlaceResponse.of(
+                        PlaceType.COMMON,
+                        "랄라배드민턴장",
+                        "서울시 강남구 강남대로",
+                        "010-1234-5678",
+                        30,
+                        "신장 개업"
+                )
+        ));
     }
+
+
 
     @PostMapping("/places")
     public Boolean createPlaces(){
@@ -96,5 +101,10 @@ public class APIPlaceController {
     public Boolean deletePlace(@PathVariable String placeId){
         return true;
     }
+
+
+
+
+
 
 }
