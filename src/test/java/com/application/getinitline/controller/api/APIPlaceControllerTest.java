@@ -66,6 +66,7 @@ class APIPlaceControllerTest {
                 .andExpect(jsonPath("$.data[0].capacity").value(30))
                 .andExpect(jsonPath("$.data[0].memo").value("신장 개업"))
                 .andExpect(jsonPath("$.success").value(true))
+
                 .andExpect(jsonPath("$.errorCode").value(ErrorCode.OK.getCode()))
                 .andExpect(jsonPath("$.message").value(ErrorCode.OK.getMessage()));
 
