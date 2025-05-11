@@ -2,6 +2,8 @@ package com.application.getinitline.service;
 
 import com.application.getinitline.constant.EventStatus;
 import com.application.getinitline.dto.EventDTO;
+import com.application.getinitline.repository.EventRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,8 +21,11 @@ import java.util.Optional;
  * -----------------------------------------------------------
  * 2025-05-11        NAHAEJUN              최초생성
  */
+@RequiredArgsConstructor
 @Service
 public class EventService {
+
+    private final EventRepository eventRepository;
 
     public List<EventDTO> getEvents(
             Long placeId ,
@@ -29,22 +34,22 @@ public class EventService {
             LocalDateTime eventStartDateTime ,
             LocalDateTime eventEndDateTime
     ) {
-        return null;
+        return eventRepository.findEvents(placeId, eventName, eventStatus, eventStartDateTime, eventEndDateTime);
     }
 
     public Optional<EventDTO> getEvent(Long eventId) {
-        return Optional.empty();
+        return eventRepository.findEvent(eventId);
     }
 
     public boolean createEvent(EventDTO eventDTO) {
-        return true;
+        return eventRepository.insertEvent(eventDTO);
     }
 
     public boolean modifyEvent(Long eventId, EventDTO eventDTO ) {
-        return true;
+        return eventRepository.updateEvent(eventId, eventDTO);
     }
 
     public boolean removeEvent(Long eventId) {
-        return true;
+        return eventRepository.removeEvent(eventId);
     }
 }
