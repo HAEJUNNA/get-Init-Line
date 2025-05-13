@@ -3,17 +3,15 @@ package com.application.getinitline.controller.error;
 import com.application.getinitline.constant.ErrorCode;
 import com.application.getinitline.dto.APIErrorResponse;
 import com.application.getinitline.exception.GeneralException;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.Map;
@@ -54,6 +52,20 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
                 , status
                 , req);
     }
+
+
+    @ExceptionHandler
+    public ResponseEntity<Object> general(ConstraintViolationException e , WebRequest req){
+        ErrorCode errorCode =ErrorCode.VALIDATION_ERROR;
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        return super.handleExceptionInternal(
+                e // 이렇게 재정의함으로서ResponseEntityExceptionHandler 의 모든메서드는 영향을 받는다.
+                , APIErrorResponse.of(false,errorCode.getCode(),errorCode.getMessage(e))
+                , HttpHeaders.EMPTY
+                , status
+                , req);
+    }
+
 
     // 우리가 알지못하는 에러들을 다루기 위한 메서드
     // RestController 한정
