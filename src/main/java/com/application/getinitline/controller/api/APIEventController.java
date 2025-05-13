@@ -1,12 +1,19 @@
 package com.application.getinitline.controller.api;
 
 import com.application.getinitline.constant.ErrorCode;
+import com.application.getinitline.constant.EventStatus;
 import com.application.getinitline.dto.APIErrorResponse;
 import com.application.getinitline.exception.GeneralException;
+import jakarta.validation.constraints.PastOrPresent;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -22,9 +29,16 @@ import java.util.List;
  */
 @RequestMapping("/api")
 @RestController
+@Validated
 public class APIEventController {
     @GetMapping("/events")
-    public List<String> getEvents(){
+    public List<String> getEvents(
+            @Positive boolean placeId ,
+            @Size(min = 2) String eventName ,
+            EventStatus eventStatus ,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime eventStartDateTime ,
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime eventEndDateTime
+    ) {
         return List.of("event1","event2");
     }
 
