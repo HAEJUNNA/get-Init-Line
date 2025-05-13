@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  */
 public record EventDTO (
         Long placeId,
-        String name,
+        String eventName,
         EventStatus eventStatus,
         LocalDateTime eventStartDateTime,
         LocalDateTime eventEndDateTime,
@@ -29,7 +29,7 @@ public record EventDTO (
 ) {
     public static EventDTO of(
             Long placeId,
-            String name,
+            String eventName,
             EventStatus eventStatus,
             LocalDateTime eventStartDateTime,
             LocalDateTime eventEndDateTime,
@@ -41,7 +41,7 @@ public record EventDTO (
     ) {
         return new EventDTO(
                 placeId,
-                name,
+                eventName,
                 eventStatus,
                 eventStartDateTime,
                 eventEndDateTime,
