@@ -29,6 +29,9 @@ class APIPlaceControllerTest {
     private final MockMvc mockMvc;
     private final ObjectMapper mapper;
 
+
+
+
     public APIPlaceControllerTest(
             @Autowired MockMvc mvc,
             @Autowired ObjectMapper mapper) {
