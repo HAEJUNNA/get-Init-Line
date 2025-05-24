@@ -46,7 +46,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> general(GeneralException e , WebRequest req){
         ErrorCode errorCode = e.getErrorCode();
         HttpStatus status = errorCode.isClientSideError() ? HttpStatus.BAD_REQUEST : HttpStatus.INTERNAL_SERVER_ERROR;
-        return handleExceptionInternal(e // 이렇게 재정의함으로서ResponseEntityExceptionHandler 의 모든메서드는 영향을 받는다.
+        return super.handleExceptionInternal(e // 이렇게 재정의함으로서ResponseEntityExceptionHandler 의 모든메서드는 영향을 받는다.
                 , APIErrorResponse.of(false,errorCode.getCode(),errorCode.getMessage(e))
                 , HttpHeaders.EMPTY
                 , status
@@ -83,7 +83,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> exception(Exception e ,WebRequest req){
         ErrorCode errorCode = ErrorCode.INTERNAL_ERROR;
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-        return handleExceptionInternal(e // 이렇게 재정의함으로서ResponseEntityExceptionHandler 의 모든메서드는 영향을 받는다.
+        return super.handleExceptionInternal(e // 이렇게 재정의함으로서ResponseEntityExceptionHandler 의 모든메서드는 영향을 받는다.
                 , APIErrorResponse.of(false,errorCode.getCode(),errorCode.getMessage(e))
                 , HttpHeaders.EMPTY
                 , status
@@ -109,7 +109,7 @@ public class APIExceptionHandler extends ResponseEntityExceptionHandler {
         * 스프링 웹에서 예외발생시 ResponseEntityExceptionHandler의 모든 handleExceptionInternal()메서드는 이제 여기서 새로
         * 오버라이드 한 handleExceptionInternal을 타게된다. 그래서 없던 커스텀한 body를 가지게된다.
         * */
-        return handleExceptionInternal(ex // 이렇게 재정의함으로서ResponseEntityExceptionHandler 의 모든메서드는 영향을 받는다.
+        return super.handleExceptionInternal(ex // 이렇게 재정의함으로서ResponseEntityExceptionHandler 의 모든메서드는 영향을 받는다.
                 , APIErrorResponse.of(false,errorCode.getCode(),errorCode.getMessage(ex))
                 , headers
                 , statusCode
