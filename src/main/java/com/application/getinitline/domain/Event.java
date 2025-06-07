@@ -2,7 +2,6 @@ package com.application.getinitline.domain;
 
 import com.application.getinitline.constant.EventStatus;
 import jakarta.persistence.*;
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
