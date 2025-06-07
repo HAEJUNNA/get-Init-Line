@@ -144,3 +144,5 @@ gradle-app.setting
 *.hprof
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij+all,gradle
+
+#QueryDSL Q클래스 삭제
