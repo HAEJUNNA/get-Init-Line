@@ -51,57 +51,52 @@ public class APIPlaceController {
 
     @GetMapping("/places")
     public APIDataResponse<List<PlaceResponse>> getPlaces() {
-        return APIDataResponse.of(List.of(
-                PlaceResponse.of(
-                        PlaceType.COMMON,
-                        "랄라배드민턴장",
-                        "서울시 강남구 강남대로",
-                        "010-1234-5678",
-                        30,
-                        "신장 개업"
-                )
-        ));
+        return APIDataResponse.of(List.of(PlaceResponse.of(
+            1L,
+            PlaceType.COMMON,
+            "랄라배드민턴장",
+            "서울시 강남구 강남대로 1234",
+            "010-1234-5678",
+            30,
+            "신장개업"
+        )));
     }
 
-
-
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/places")
-    public Boolean createPlaces(){
-        return true;
+    public APIDataResponse<Void> createPlace(@RequestBody PlaceRequest placeRequest) {
+        return APIDataResponse.empty();
     }
 
-    @GetMapping("/places/{placesId}")
-    public String getPlaces(@PathVariable String placesId){
-        return "places " + placesId;
-    }
-    // 단일 , 주소 테스트
-    @GetMapping("/placeTest/{placesId}")
-    public APIDataResponse<PlaceDto> getTestPlace(@PathVariable String placesId){
-
-        if (placesId.equals(2)) {
-            return APIDataResponse.of(null);
+    @GetMapping("/places/{placeId}")
+    public APIDataResponse<PlaceResponse> getPlace(@PathVariable Long placeId) {
+        if (placeId.equals(2L)) {
+            return APIDataResponse.empty();
         }
 
-        return APIDataResponse.of( PlaceDto.of(
-                PlaceType.COMMON,
-                "랄라배드민턴장",
-                "서울시 강남구 강남대로",
-                "010-1234-5678",
-                30,
-                "신장 개업"
+        return APIDataResponse.of(PlaceResponse.of(
+            placeId,
+            PlaceType.COMMON,
+            "랄라배드민턴장",
+            "서울시 강남구 강남대로 1234",
+            "010-1234-5678",
+            30,
+            "신장개업"
         ));
     }
 
     @PutMapping("/places/{placeId}")
-    public Boolean modifyPlace(@PathVariable String placeId){
-        return true;
+    public APIDataResponse<Void> modifyPlace(
+        @PathVariable Long placeId,
+        @RequestBody PlaceRequest placeRequest
+    ) {
+        return APIDataResponse.empty();
     }
 
     @DeleteMapping("/places/{placeId}")
-    public Boolean deletePlace(@PathVariable String placeId){
-        return true;
+    public APIDataResponse<Void> removePlace(@PathVariable Long placeId) {
+        return APIDataResponse.empty();
     }
-
 
 
 
